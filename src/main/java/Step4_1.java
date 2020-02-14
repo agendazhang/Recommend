@@ -56,8 +56,10 @@ public class Step4_1 {
         Path input2 = new Path(path.get("Step4_1Input2"));
         Path output = new Path(path.get("Step4_1Output"));
         // delete last saved output
+        /*
         HDFSAPI hdfs = new HDFSAPI(new Path(Recommend.HDFS));
         hdfs.delFile(output);
+        */
         // set job
         Job job = Job.getInstance(conf);
         job.setJarByClass(Step4_1.class);

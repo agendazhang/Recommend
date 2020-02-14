@@ -59,10 +59,12 @@ public class Step1 {
         Path output = new Path(path.get("Step1Output"));
         //upload local file
 
+        /*
         HDFSAPI hdfs = new HDFSAPI(new Path(Recommend.HDFS));
         hdfs.delFile(input);
         hdfs.mkDir(input);
         hdfs.copyLocalToHdfs(new Path(path.get("data")), input);
+        */
 
         //set job
         Job job = Job.getInstance(conf,"Step1");

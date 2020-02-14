@@ -8,14 +8,14 @@ import org.apache.hadoop.fs.Path;
 //import HDFSAPI;
 
 public class Recommend {
-    public static final String HDFS = "/Users/zhangcheng/IdeaProjects/Recommend";
+    public static final String HDFS = "/Recommend";
 
     public static final Pattern DELIMITER = Pattern.compile("[\t,]");
 
     public static void main(String[] args) throws Exception {
         Map<String, String> path = new HashMap<String, String>();
         //path for local data
-        path.put("data", "/Users/zhangcheng/IdeaProjects/Recommend/input/data.csv");
+        path.put("data", "/Recommend/data.csv");
 
         //step1 i/o path
         path.put("Step1Input", HDFS);
