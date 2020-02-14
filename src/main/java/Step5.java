@@ -119,6 +119,9 @@ public class Step5 {
         Job job =Job.getInstance(conf);
         job.setJarByClass(Step5.class);
 
+        job.setMapOutputKeyClass(Text.class);
+        job.setMapOutputValueClass(DoubleWritable.class);
+
         job.setOutputKeyClass(IntWritable.class);
         job.setOutputValueClass(DoubleWritable.class);
 
