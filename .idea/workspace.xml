@@ -3,13 +3,19 @@
   <component name="ChangeListManager">
     <list default="true" id="ebd1cd77-26a9-4329-9db7-80bc42990074" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Recommend.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Recommend.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Step1.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Step1.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Step3.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Step3.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Step4_1.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Step4_2.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Step5.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Step5.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Recommend.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Recommend.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Step1$Step1_ToItemPreMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Step1$Step1_ToItemPreMapper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Step1$Step1_ToUserVectorReducer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Step1$Step1_ToUserVectorReducer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Step1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Step1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Step3$Step31_ScoreMatrixProcessingMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Step3$Step31_ScoreMatrixProcessingMapper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Step3$Step32_CooccurrenceMatrixProcessingMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Step3$Step32_CooccurrenceMatrixProcessingMapper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Step3$Step3_MatrixMultiplicationReducer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Step3$Step3_MatrixMultiplicationReducer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Step3.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Step3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Step5$Step5_SortRecommendationScoresReducer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Step5$Step5_SortRecommendationScoresReducer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Step5.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Step5.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

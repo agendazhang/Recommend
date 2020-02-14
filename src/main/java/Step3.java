@@ -15,6 +15,7 @@ import org.apache.hadoop.mapreduce.Reducer;
 import org.apache.hadoop.mapreduce.lib.chain.ChainMapper;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.input.MultipleInputs;
+import org.apache.hadoop.mapreduce.lib.input.TextInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 
 //import org.apache.hadoop.examples.HDFSAPI;
@@ -112,13 +113,18 @@ public class Step3 {
         Job job =Job.getInstance(conf, "Step3");
         job.setJarByClass(Step3.class);
 
-        ChainMapper.addMapper(job, Step31_ScoreMatrixProcessingMapper.class, LongWritable.class, Text.class,
-                IntWritable.class, Text.class, conf);
-        ChainMapper.addMapper(job, Step32_CooccurrenceMatrixProcessingMapper.class, LongWritable.class, Text.class,
-                IntWritable.class, Text.class, conf);
+        //ChainMapper.addMapper(job, Step31_ScoreMatrixProcessingMapper.class, LongWritable.class, Text.class,
+                //IntWritable.class, Text.class, conf);
+        //ChainMapper.addMapper(job, Step32_CooccurrenceMatrixProcessingMapper.class, LongWritable.class, Text.class,
+                //IntWritable.class, Text.class, conf);
 
-        job.setMapperClass(Step31_ScoreMatrixProcessingMapper.class);
-        job.setMapperClass(Step32_CooccurrenceMatrixProcessingMapper.class);
+        //job.setMapperClass(Step31_ScoreMatrixProcessingMapper.class);
+        //job.setMapperClass(Step32_CooccurrenceMatrixProcessingMapper.class);
+
+        MultipleInputs.addInputPath(job, input1, TextInputFormat.class,
+                Step31_ScoreMatrixProcessingMapper.class);
+        MultipleInputs.addInputPath(job, input2, TextInputFormat.class,
+                Step32_CooccurrenceMatrixProcessingMapper.class);
 
         job.setReducerClass(Step3_MatrixMultiplicationReducer.class);
 
@@ -127,11 +133,6 @@ public class Step3 {
 
         job.setOutputKeyClass(Text.class);
         job.setOutputValueClass(DoubleWritable.class);
-
-        MultipleInputs.addInputPath(job, input1, FileInputFormat.class,
-                Step31_ScoreMatrixProcessingMapper.class);
-        MultipleInputs.addInputPath(job, input2, FileInputFormat.class,
-                Step32_CooccurrenceMatrixProcessingMapper.class);
 
         FileOutputFormat.setOutputPath(job, output);
         // run job
