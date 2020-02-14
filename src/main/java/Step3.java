@@ -22,9 +22,17 @@ public class Step3 {
         @Override
         public void map(LongWritable key, Text values, Context context)
                 throws IOException, InterruptedException {
-            //ToDo
-            //
+            String[] tokens = Recommend.DELIMITER.split(values.toString());
+            int userID = Integer.parseInt(tokens[0]);
 
+            for(int i = 1; i < tokens.length; i++) {
+                String[] itemIDPref = tokens[i].split(":");
+                int itemID = Integer.parseInt(itemIDPref[0]);
+                String pref = itemIDPref[1];
+                k.set(itemID);
+                v.set(userID + ":" + pref);
+                context.write(k, v);
+            }
         }
     }
 
@@ -59,8 +67,7 @@ public class Step3 {
         @Override
         public void map(LongWritable key, Text values,Context context)
                 throws IOException, InterruptedException {
-            //ToDo
-            //
+
         }
     }
 
