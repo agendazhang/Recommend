@@ -1,6 +1,7 @@
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 
 import org.apache.hadoop.conf.Configuration;
@@ -21,6 +22,9 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 //import org.apache.hadoop.examples.HDFSAPI;
 
 public class Step3 {
+    // This represents the item IDs that are for the user (in this case myself, user ID 838)
+    static HashSet<Integer> itemIDsForUser = new HashSet<Integer>();
+
     public static class Step31_ScoreMatrixProcessingMapper extends Mapper<LongWritable, Text, IntWritable, Text> {
         private final static IntWritable k = new IntWritable();
         private final static Text v = new Text();
@@ -31,13 +35,17 @@ public class Step3 {
             String[] tokens = Recommend.DELIMITER.split(values.toString());
             int userID = Integer.parseInt(tokens[0]);
 
-            for(int i = 1; i < tokens.length; i++) {
-                String[] itemIDPref = tokens[i].split(":");
-                int itemID = Integer.parseInt(itemIDPref[0]);
-                String pref = itemIDPref[1];
-                k.set(itemID);
-                v.set(userID + ":" + pref);
-                context.write(k, v);
+            // Last 3 digits of my student ID is 838
+            if(userID == 838) {
+                for(int i = 1; i < tokens.length; i++) {
+                    String[] itemIDPref = tokens[i].split(":");
+                    int itemID = Integer.parseInt(itemIDPref[0]);
+                    itemIDsForUser.add(itemID);
+                    String pref = itemIDPref[1];
+                    k.set(itemID);
+                    v.set(userID + ":" + pref);
+                    context.write(k, v);
+                }
             }
         }
     }
@@ -84,6 +92,9 @@ public class Step3 {
 
             for(Map.Entry<Integer, Integer> entry: itemIDsFrequenciesMap.entrySet()){
                 int itemID = entry.getKey();
+                if(!itemIDsForUser.contains(itemID)) {
+                    continue;
+                }
                 int frequency = entry.getValue();
 
                 for (Map.Entry<Integer, Double> entry2: userIDsPrefsMap.entrySet()){

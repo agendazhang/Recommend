@@ -82,11 +82,8 @@ public class Step5 {
                 String userIDItemID = key.toString();
                 int userID = Integer.parseInt(userIDItemID.split(":")[0]);
 
-                // Last 3 digits of my student ID is 838
-                if(userID == 838) {
-                    int itemID = Integer.parseInt(userIDItemID.split(":")[1]);
-                    treeSet.add(new Pair(itemID, score.get()));
-                }
+                int itemID = Integer.parseInt(userIDItemID.split(":")[1]);
+                treeSet.add(new Pair(itemID, score.get()));
 
             }
         }
