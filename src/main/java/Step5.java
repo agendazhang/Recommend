@@ -1,13 +1,11 @@
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
+import org.apache.hadoop.io.DoubleWritable;
+import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Job;
@@ -23,35 +21,81 @@ import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;
 //import HDFSAPI;
 
 public class Step5 {
-    public static class Step5_FilterSortMapper extends Mapper<LongWritable, Text, Text, Text> {
-        private String flag;
-        private Text k;
-        private Text v;
-
-        @Override
-        protected void setup(
-                Mapper<LongWritable, Text, Text, Text>.Context context)
-                throws IOException, InterruptedException {
-            FileSplit split = (FileSplit) context.getInputSplit();
-            flag = split.getPath().getParent().getName();// dataset
-        }
+    public static class Step5_SortRecommendationScoresMapper extends Mapper<LongWritable, Text, Text, DoubleWritable> {
 
         @Override
         public void map(LongWritable key, Text values, Context context) throws IOException, InterruptedException {
-            //you can use provided SortHashMap.java or design your own code.
-            //ToDo
-            //
+            String[] tokens = Recommend.DELIMITER.split(values.toString());
+            String userIDItemID = tokens[0];
+            double score = Double.parseDouble(tokens[1]);
+            context.write(new Text(userIDItemID), new DoubleWritable(score));
 
         }
     }
 
-    public static class Step5_FilterSortReducer extends Reducer<Text, Text, Text, Text> {
+    public static class Step5_SortRecommendationScoresReducer extends Reducer<Text, DoubleWritable, IntWritable, DoubleWritable> {
+
+        private class Pair implements Comparable<Pair> {
+            private int itemID;
+            private double score;
+
+            private Pair(int itemID, double score) {
+                this.itemID = itemID;
+                this.score = score;
+            }
+
+            public int compareTo(Pair other) {
+                if(this.score <= other.score) {
+                    return -1;
+                } else {
+                    return 1;
+                }
+            }
+
+            @Override
+            public boolean equals(Object o) {
+                if (this == o) return true;
+                if (o == null || getClass() != o.getClass()) return false;
+                Pair pair = (Pair) o;
+                return itemID == pair.itemID &&
+                        score == pair.score;
+            }
+
+            @Override
+            public int hashCode() {
+                return Objects.hash(itemID, score);
+            }
+        }
+
+        private TreeSet<Pair> treeSet;
+
         @Override
-        public void reduce(Text key, Iterable<Text> values, Context context) throws IOException, InterruptedException {
-            //you can use provided SortHashMap.java or design your own code.
+        public void setup(Context context) throws IOException, InterruptedException {
+            treeSet = new TreeSet<Pair>();
+        }
 
-            //ToDo
+        @Override
+        public void reduce(Text key, Iterable<DoubleWritable> values, Context context)
+                throws IOException, InterruptedException {
 
+            for (DoubleWritable score: values) {
+                String userIDItemID = key.toString();
+                int userID = Integer.parseInt(userIDItemID.split(":")[0]);
+                int itemID = Integer.parseInt(userIDItemID.split(":")[1]);
+                treeSet.add(new Pair(itemID, score.get()));
+            }
+        }
+
+        @Override
+        public void cleanup(Context context) throws IOException, InterruptedException {
+            Iterator<Pair> iterator = treeSet.descendingIterator();
+
+            while(iterator.hasNext()) {
+                Pair next = iterator.next();
+                int itemID = next.itemID;
+                double score = next.score;
+                context.write(new IntWritable(itemID), new DoubleWritable(score));
+            }
         }
     }
 
@@ -59,8 +103,7 @@ public class Step5 {
         //get configuration info
         Configuration conf = Recommend.config();
         // I/O path
-        Path input1 = new Path(path.get("Step5Input1"));
-        Path input2 = new Path(path.get("Step5Input2"));
+        Path input = new Path(path.get("Step5Input"));
         Path output = new Path(path.get("Step5Output"));
         // delete last saved output
         /*
@@ -71,16 +114,16 @@ public class Step5 {
         Job job =Job.getInstance(conf);
         job.setJarByClass(Step5.class);
 
-        job.setOutputKeyClass(Text.class);
-        job.setOutputValueClass(Text.class);
+        job.setOutputKeyClass(IntWritable.class);
+        job.setOutputValueClass(DoubleWritable.class);
 
-        job.setMapperClass(Step5_FilterSortMapper.class);
-        job.setReducerClass(Step5_FilterSortReducer.class);
+        job.setMapperClass(Step5_SortRecommendationScoresMapper.class);
+        job.setReducerClass(Step5_SortRecommendationScoresReducer.class);
 
         job.setInputFormatClass(TextInputFormat.class);
         job.setOutputFormatClass(TextOutputFormat.class);
 
-        FileInputFormat.setInputPaths(job, input1,input2);
+        FileInputFormat.addInputPath(job, input);
         FileOutputFormat.setOutputPath(job, output);
 
         job.waitForCompletion(true);

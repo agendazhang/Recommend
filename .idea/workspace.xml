@@ -3,12 +3,12 @@
   <component name="ChangeListManager">
     <list default="true" id="ebd1cd77-26a9-4329-9db7-80bc42990074" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Recommend.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Recommend.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Step1.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Step1.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Step2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Step2.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Step3.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Step3.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Step4_1.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Step4_1.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Step4_2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Step4_2.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Step4_1.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Step4_2.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Step5.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Step5.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

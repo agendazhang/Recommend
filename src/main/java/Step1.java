@@ -24,12 +24,15 @@ public class Step1 {
 
             String[] tokens = Recommend.DELIMITER.split(value.toString());
             int userID = Integer.parseInt(tokens[0]);
-            String itemID = tokens[1];
-            String pref = tokens[2];
-            k.set(userID);
-            v.set(itemID+":"+pref);
-            context.write(k, v);
 
+            // Last 3 digits of my student ID is 838
+            if(userID == 838) {
+                String itemID = tokens[1];
+                String pref = tokens[2];
+                k.set(userID);
+                v.set(itemID + ":" + pref);
+                context.write(k, v);
+            }
         }
     }
 

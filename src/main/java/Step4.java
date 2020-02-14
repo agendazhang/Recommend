@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
+import org.apache.hadoop.io.DoubleWritable;
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Job;
@@ -19,32 +20,30 @@ import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;
 //
 //import HDFSAPI;
 
-public class Step4_1 {
-    public static class Step4_PartialMultiplyMapper extends Mapper<LongWritable, Text, Text, Text> {
+public class Step4 {
+    public static class Step4_MatrixMultiplicationSumMapper extends Mapper<LongWritable, Text, Text, DoubleWritable> {
 
-        // you can solve the co-occurrence Matrix/left matrix and score matrix/right matrix separately
-
-        @Override
-        protected void setup(Context context) throws IOException, InterruptedException {
-            FileSplit split = (FileSplit) context.getInputSplit();
-            String flag = split.getPath().getParent().getName();// data set
-        }
 
         @Override
         public void map(LongWritable key, Text values, Context context) throws IOException, InterruptedException {
             String[] tokens = Recommend.DELIMITER.split(values.toString());
-            //ToDo
-            //
+            String userIDItemID = tokens[0];
+            double pref = Double.parseDouble(tokens[1]);
+            context.write(new Text(userIDItemID), new DoubleWritable(pref));
         }
 
     }
 
-    public static class Step4_AggregateReducer extends Reducer<Text, Text, Text, Text> {
+    public static class Step4_MatrixMultiplicationSumReducer extends Reducer<Text, DoubleWritable, Text, DoubleWritable> {
 
         @Override
-        public void reduce(Text key, Iterable<Text> values, Context context) throws IOException, InterruptedException {
-            //ToDo
-            //
+        public void reduce(Text key, Iterable<DoubleWritable> values, Context context) throws IOException, InterruptedException {
+            double sum = 0.0;
+            for(DoubleWritable value: values) {
+                sum += value.get();
+            }
+
+            context.write(key, new DoubleWritable(sum));
         }
     }
 
@@ -52,9 +51,8 @@ public class Step4_1 {
         //get configuration info
         Configuration conf = Recommend.config();
         // get I/O path
-        Path input1 = new Path(path.get("Step4_1Input1"));
-        Path input2 = new Path(path.get("Step4_1Input2"));
-        Path output = new Path(path.get("Step4_1Output"));
+        Path input = new Path(path.get("Step4Input"));
+        Path output = new Path(path.get("Step4Output"));
         // delete last saved output
         /*
         HDFSAPI hdfs = new HDFSAPI(new Path(Recommend.HDFS));
@@ -62,18 +60,19 @@ public class Step4_1 {
         */
         // set job
         Job job = Job.getInstance(conf);
-        job.setJarByClass(Step4_1.class);
+        job.setJarByClass(Step4.class);
 
         job.setOutputKeyClass(Text.class);
-        job.setOutputValueClass(Text.class);
+        job.setOutputValueClass(DoubleWritable.class);
 
-        job.setMapperClass(Step4_1.Step4_PartialMultiplyMapper.class);
-        job.setReducerClass(Step4_1.Step4_AggregateReducer.class);
+        job.setMapperClass(Step4_MatrixMultiplicationSumMapper.class);
+        job.setCombinerClass(Step4_MatrixMultiplicationSumReducer.class);
+        job.setReducerClass(Step4_MatrixMultiplicationSumReducer.class);
 
         job.setInputFormatClass(TextInputFormat.class);
         job.setOutputFormatClass(TextOutputFormat.class);
 
-        FileInputFormat.setInputPaths(job, input1, input2);
+        FileInputFormat.addInputPath(job, input);
         FileOutputFormat.setOutputPath(job, output);
 
         job.waitForCompletion(true);
