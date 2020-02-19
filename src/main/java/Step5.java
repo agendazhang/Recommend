@@ -35,6 +35,7 @@ public class Step5 {
 
     public static class Step5_SortRecommendationScoresReducer extends Reducer<Text, DoubleWritable, IntWritable, DoubleWritable> {
 
+        // Group each itemID and score as a 2-element tuple
         private class Pair implements Comparable<Pair> {
             private int itemID;
             private double score;
@@ -44,6 +45,7 @@ public class Step5 {
                 this.score = score;
             }
 
+            // Compares based on the score
             public int compareTo(Pair other) {
                 if(this.score <= other.score) {
                     return -1;
@@ -83,6 +85,7 @@ public class Step5 {
                 int userID = Integer.parseInt(userIDItemID.split(":")[0]);
 
                 int itemID = Integer.parseInt(userIDItemID.split(":")[1]);
+                // Add the new Pair into the TreeSet, which will order them automatically
                 treeSet.add(new Pair(itemID, score.get()));
 
             }
@@ -92,6 +95,7 @@ public class Step5 {
         public void cleanup(Context context) throws IOException, InterruptedException {
             Iterator<Pair> iterator = treeSet.descendingIterator();
 
+            // Output the sorted itemIDs based on recommendation score
             while(iterator.hasNext()) {
                 Pair next = iterator.next();
                 int itemID = next.itemID;

@@ -3,13 +3,21 @@
   <component name="ChangeListManager">
     <list default="true" id="ebd1cd77-26a9-4329-9db7-80bc42990074" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Recommend.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Recommend.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Step2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Step2.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Step3.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Step3.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Step4.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Step4.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Step5.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Step5.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Recommend.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Recommend.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Recommend.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Recommend.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Step3$Step31_ScoreMatrixProcessingMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Step3$Step31_ScoreMatrixProcessingMapper.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Step3$Step32_CooccurrenceMatrixProcessingMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Step3$Step32_CooccurrenceMatrixProcessingMapper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Step2$Step2_UserVectorToConoccurrenceReducer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Step2$Step2_UserVectorToConoccurrenceReducer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Step2$Step2_UserVectorToCooccurrenceMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Step2$Step2_UserVectorToCooccurrenceMapper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Step2.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Step2.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Step3$Step3_MatrixMultiplicationReducer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Step3$Step3_MatrixMultiplicationReducer.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Step3.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Step3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Step4$Step4_MatrixMultiplicationSumReducer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Step4$Step4_MatrixMultiplicationSumReducer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Step4.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Step4.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Step5$Step5_SortRecommendationScoresReducer$Pair.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Step5$Step5_SortRecommendationScoresReducer$Pair.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Step5$Step5_SortRecommendationScoresReducer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Step5$Step5_SortRecommendationScoresReducer.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Step5.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Step5.class" afterDir="false" />
     </list>
@@ -45,6 +53,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RunManager">
     <configuration name="Recommend" type="Application" factoryName="Application">
@@ -73,21 +82,21 @@
       <screen x="0" y="0" width="1280" height="800" />
     </state>
     <state x="104" y="62" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1280.800@0.0.1280.800" timestamp="1581662941962" />
-    <state width="1238" height="212" key="GridCell.Tab.0.bottom" timestamp="1581662948346">
+    <state width="1238" height="212" key="GridCell.Tab.0.bottom" timestamp="1582110470413">
       <screen x="0" y="0" width="1280" height="800" />
     </state>
-    <state width="1238" height="212" key="GridCell.Tab.0.bottom/0.0.1280.800@0.0.1280.800" timestamp="1581662948346" />
-    <state width="1238" height="212" key="GridCell.Tab.0.center" timestamp="1581662948345">
+    <state width="1238" height="212" key="GridCell.Tab.0.bottom/0.0.1280.800@0.0.1280.800" timestamp="1582110470413" />
+    <state width="1238" height="212" key="GridCell.Tab.0.center" timestamp="1582110470410">
       <screen x="0" y="0" width="1280" height="800" />
     </state>
-    <state width="1238" height="212" key="GridCell.Tab.0.center/0.0.1280.800@0.0.1280.800" timestamp="1581662948345" />
-    <state width="1238" height="212" key="GridCell.Tab.0.left" timestamp="1581662948344">
+    <state width="1238" height="212" key="GridCell.Tab.0.center/0.0.1280.800@0.0.1280.800" timestamp="1582110470410" />
+    <state width="1238" height="212" key="GridCell.Tab.0.left" timestamp="1582110470408">
       <screen x="0" y="0" width="1280" height="800" />
     </state>
-    <state width="1238" height="212" key="GridCell.Tab.0.left/0.0.1280.800@0.0.1280.800" timestamp="1581662948344" />
-    <state width="1238" height="212" key="GridCell.Tab.0.right" timestamp="1581662948346">
+    <state width="1238" height="212" key="GridCell.Tab.0.left/0.0.1280.800@0.0.1280.800" timestamp="1582110470408" />
+    <state width="1238" height="212" key="GridCell.Tab.0.right" timestamp="1582110470411">
       <screen x="0" y="0" width="1280" height="800" />
     </state>
-    <state width="1238" height="212" key="GridCell.Tab.0.right/0.0.1280.800@0.0.1280.800" timestamp="1581662948346" />
+    <state width="1238" height="212" key="GridCell.Tab.0.right/0.0.1280.800@0.0.1280.800" timestamp="1582110470411" />
   </component>
 </project>

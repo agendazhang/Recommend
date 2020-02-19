@@ -39,6 +39,7 @@ public class Step4 {
         @Override
         public void reduce(Text key, Iterable<DoubleWritable> values, Context context) throws IOException, InterruptedException {
             double sum = 0.0;
+            // Sum component of matrix multiplication for each itemID
             for(DoubleWritable value: values) {
                 sum += value.get();
             }

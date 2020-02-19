@@ -28,12 +28,14 @@ public class Step2 {
             String[] tokens = Recommend.DELIMITER.split(values.toString());
             int[] itemIDs = new int[tokens.length - 1];
 
+            // Get all the item IDs of the current user
             for(int i = 1; i < tokens.length; i++) {
                 itemIDs[i - 1] = Integer.parseInt(tokens[i].split(":")[0]);
             }
 
             for(int i = 0; i < itemIDs.length; i++) {
                 for(int j = 0; j < itemIDs.length; j++) {
+                    // For each pair of itemIDs for the current user, output them as key
                     int itemID1 = itemIDs[i];
                     int itemID2 = itemIDs[j];
                     k.set(itemID1 + ":" + itemID2);
@@ -51,6 +53,8 @@ public class Step2 {
         protected void reduce(Text key, Iterable<IntWritable> values, Context context)
                 throws IOException, InterruptedException {
             int count = 0;
+            // For each pair of itemIDs, sum up the ones in the input value to get the total number of times
+            // where they appeared together in user histories
             for(IntWritable value: values) {
                 count += value.get();
             }

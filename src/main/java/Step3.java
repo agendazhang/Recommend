@@ -78,11 +78,13 @@ public class Step3 {
 
             for(Text value: values) {
                 if(value.toString().contains("=")) {
+                    // From Step32_CooccurrenceMatrixProcessingMapper
                     String[] itemIDFrequency = value.toString().split("=");
                     int itemID = Integer.parseInt(itemIDFrequency[0]);
                     int frequency = Integer.parseInt(itemIDFrequency[1]);
                     itemIDsFrequenciesMap.put(itemID, frequency);
                 } else {
+                    // From Step31_ScoreMatrixProcessingMapper
                     String[] userIDPref = value.toString().split(":");
                     int userID = Integer.parseInt(userIDPref[0]);
                     double pref = Double.parseDouble(userIDPref[1]);
@@ -92,11 +94,13 @@ public class Step3 {
 
             for(Map.Entry<Integer, Integer> entry: itemIDsFrequenciesMap.entrySet()){
                 int itemID = entry.getKey();
+                // Consider only itemIDs for userID 838
                 if(!itemIDsForUser.contains(itemID)) {
                     continue;
                 }
                 int frequency = entry.getValue();
 
+                // Multiplication component of matrix multiplication for each itemID
                 for (Map.Entry<Integer, Double> entry2: userIDsPrefsMap.entrySet()){
                     int userID = entry2.getKey();
                     double pref = entry2.getValue();
